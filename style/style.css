@@ -1,0 +1,65 @@
+body
+{
+    color: #000;
+    background-color: #6699aa;
+    font-family: "Trebuchet MS", Helvetica, Arial, sans-serif;
+}
+
+#container
+{
+    background-color: #fff;
+    margin: auto;
+    width: 800px;
+    height: 700px;
+    padding: 10px;
+    padding-bottom: 10px;
+    background:
+        -webkit-gradient(linear, left top, left bottom,
+        from(rgba(200, 200, 240, 0.64)), to(rgba(255, 255, 255, 0.64)));
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+}
+
+#header
+{
+    height: 100px;
+
+}
+
+#content
+{
+    padding: 10px;
+    width: 600px;
+    margin: auto;
+    background-color: #fff;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+}
+
+table
+{
+    border-collapse: collapse;
+    margin: auto;
+    width: 500px;
+}
+
+table td, table th
+{
+    border: 1px solid #6699aa;
+    padding: 3px;
+	 text-align: left;
+}
+
+table thead tr
+{
+    font-weight: bold;
+    background:
+        -webkit-gradient(linear, left top, left bottom,
+        from(rgba(100, 200, 240, 0.64)), to(rgba(255, 255, 255, 0.64)));
+}
+
+tr#sumrow
+{
+    background-color: #fed;
+    height: 2em;
+}
