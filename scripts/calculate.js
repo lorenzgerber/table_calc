@@ -1,8 +1,3 @@
-/* addLoadEvent and insertAfter
-   from 'DOM Scripting', Jeremy Keith &
-   Jeffery Sambells. friendsofED (2010)
-*/
-
 addLoadEvent(addColumn);
 addLoadEvent(addFinalRow);
 addLoadEvent(addCalcButton);
@@ -17,9 +12,10 @@ function addColumn(){
   var numberOfRows = table.rows.length;
   for(var i = 1, row; i < numberOfRows ; i++ ){
     row = table.rows[i];
-    row.insertCell(-1);
+    var newCell = row.insertCell(-1);
+    var textNode = document.createTextNode('');
+    newCell.appendChild(textNode);
   }
-
 }
 
 function addFinalRow(){
@@ -28,7 +24,11 @@ function addFinalRow(){
   var rowGrandTotal = table.insertRow(-1);
   rowGrandTotal.setAttribute('id', 'sumrow');
   for (var i = 0; i < numberOfCols; i++ ){
-    rowGrandTotal.insertCell(i);
+    var newCell = rowGrandTotal.insertCell(i);
+    if (i > (numberOfCols - 3) ){
+      var newTextNode = document.createTextNode('');
+      newCell.appendChild(newTextNode);
+    }
   }
 }
 
@@ -57,7 +57,8 @@ function update(){
   for (var i = 1; i < table.rows.length -1; i++){
     calcRow(table.rows[i]);
   }
-
+  calcTotalProducts();
+  calcTotalAmount();
 }
 
 function calcRow(row){
@@ -65,16 +66,33 @@ function calcRow(row){
   var amount = parseInt(row.cells[4].firstChild.value);
   var price = parseInt(row.cells[3].firstChild.nodeValue);
   sum = amount * price;
-  var sumText = document.createTextNode(sum);
-  row.cells[5].appendChild = sumText;
-
+  var sumCell = row.cells[5].firstChild;
+  sumCell.nodeValue = sum;
 }
+
 
 function calcTotalProducts(){
-
+  var totalSum  = 0;
+  var table = document.getElementById('pricetable');
+  var numberOfRows = table.rows.length - 1;
+  for (var i = 1; i < numberOfRows; i++){
+    var productSum = table.rows[i].cells[5].firstChild.nodeValue;
+    totalSum += parseInt(productSum);
+  }
+  var totalSumCell = table.rows[numberOfRows].cells[5].firstChild;
+  totalSumCell.nodeValue = totalSum;
 }
 
-function calcTotalValue(){
+function calcTotalAmount(){
+  var totalAmount  = 0;
+  var table = document.getElementById('pricetable');
+  var numberOfRows = table.rows.length - 1;
+  for (var i = 1; i < numberOfRows; i++){
+    var amountSum = table.rows[i].cells[4].firstChild.value;
+    totalAmount += parseInt(amountSum);
+  }
+  var totalAmountCell = table.rows[numberOfRows].cells[4].firstChild;
+  totalAmountCell.nodeValue = totalAmount;
 
 }
 
